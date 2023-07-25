@@ -1,0 +1,1300 @@
+#:import MDToolbar kivymd.uix.toolbar.MDToolbar
+#:import ThemeManager kivymd.theming.ThemeManager
+#:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
+#:import partial functools.partial
+#:import NavigationLayout kivymd.uix.navigationdrawer.MDNavigationLayout
+#:import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
+#:import MDChips kivymd.uix.chip.MDChip
+#:import MDBottomNavigation kivymd.uix.bottomnavigation.MDBottomNavigation
+#:import MDCard kivymd.uix.card.MDCard
+#:import MDFillRoundFlatButton kivymd.uix.button.MDFillRoundFlatButton
+#:import MDRectangleFlatButton kivymd.uix.button.MDRectangleFlatButton
+#:import randint random.randint
+#:import choice random.choice
+#:import randrange random.randrange
+#:import MDList kivymd.uix.list.MDList
+<Main>:
+    BL:
+<BL>:
+    size_hint: 1, 1
+    orientation: "vertical"
+    MDToolbar:
+        title: "R6Random"
+        elevation: 10
+        pos_hint: {"top": 1}
+        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+            Screen:
+                name: "screen1"
+                BL_Team:
+            Screen:
+                name: "screen2"
+                BL_op_a:
+            Screen:
+                name: "screen4"
+                BL_op_d:
+            Screen:
+                name: "screen3"
+                BL_Map:
+                    MDRaisedButton:
+                        text: "Map Settings"
+                        size_hint: 1, 0.1
+                        on_release:
+                            screen_manager.current = "map_settings"
+            Screen:
+                name: "map_settings"
+                BL_Map_s:
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen3"
+            Screen:
+                name:"screen5"
+                BoxLayout:
+                    padding: 15
+                    spacing: 5
+                    orientation: "vertical"
+                    ScrollView:
+                        GridLayout:
+                            size_hint: 1, 1
+                            cols: 1
+                            MDLabel:
+                                size_hint: 1, 0.5
+                                text: "Match Settings"
+                                halign: "center"
+                                font_style: "H5"
+                                theme_text_color: "Primary"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Rounds"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "rr"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Pick Phase"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "pp"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Health and Damage"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "had"
+                            MDLabel:
+                                size_hint: 1, 0.5
+                                text: "Game Mode Settings"
+                                halign: "center"
+                                font_style: "H5"
+                                theme_text_color: "Primary"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Bomb Parameters"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "bp"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Phases"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "p"
+                            MDLabel:
+                                size_hint: 1, 0.5
+                                text: "Other Settings"
+                                halign: "center"
+                                font_style: "H5"
+                                theme_text_color: "Primary"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "HUD Settings"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "hud"
+                            MDRectangleFlatButton:
+                                size_hint: 1, 0.5
+                                text: "Game Mode"
+                                theme_text_color: "Primary"
+                                on_release:
+                                    screen_manager.current = "gm"
+
+            Screen:
+                name: "rr"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    MDCard:
+                        orientation: "vertical"
+                        elevation: 10
+                        size_hint: 1, 0.5
+                        rounds: rounds.__self__
+                        role: role.__self__
+                        over: over.__self__
+                        diff: diff.__self__
+                        change: change.__self__
+                        MDLabel:
+                            id: rounds
+                            text: "Rounds"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: role
+                            text: "Role Swap"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: over
+                            text: "Overtime Rounds"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: diff
+                            text: "Overtime Score Diffrence"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: change
+                            text: "Overtime Role Change"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            rounds.text = "Rounds: " + str(randint(1, 20))
+                            role.text = "Role Swap: " + str(choice(['Off', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']))
+                            over.text = "Overtime Rounds: " + str(choice(['Off', '1', '2', '3', '4', '5', '6', 'INFINITE OVERTIME']))
+                            diff.text = "Overtime Score Diffrence: " + str(randint(1, 2))
+                            change.text = "Overtime Role Change: " + str(choice(['Off', '1', '2']))
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "pp"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    MDCard:
+                        orientation: "vertical"
+                        elevation: 10
+                        size_hint: 1, 0.5
+                        timer: timer.__self__
+                        pick6: pick6.__self__
+                        timer6: timer6.__self__
+                        rev_phase: rev_phase.__self__
+                        MDLabel:
+                            id: timer
+                            text: "Pick Phase Timer"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: pick6
+                            text: "6THPick Phase"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: timer6
+                            text: "6THPick Phase Timer"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: rev_phase
+                            text: "Reveal Phase Timer"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            timer.text = "Pick Phase Timer: " + str(randrange(15, 45, 5))
+                            pick6.text = "6THPick Phase: " + str(choice(['Off', 'On']))
+                            timer6.text = "6THPick Phase Timer: " + str(randrange(15, 45, 5))
+                            rev_phase.text = "Reveal Phase Timer: " + str(randrange(5, 15, 2))
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "had"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    MDCard:
+                        orientation: "vertical"
+                        elevation: 10
+                        size_hint: 1, 0.5
+                        hp: hp.__self__
+                        inj: inj.__self__
+                        rev: rev.__self__
+                        dmg: dmg.__self__
+                        MDLabel:
+                            id: hp
+                            text: "Operator HP"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: dmg
+                            text: "Friendly Damage"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: rev
+                            text: "Reverse Friendly"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: inj
+                            text: "Injured"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            hp.text = "Operator HP: " + str(randrange(25, 200, 25))
+                            dmg.text = "Friendly Damage: " + str(choice(['Off', '25', '50', '75', '100', '125', '150', '175', '200']))
+                            rev.text = "Reverse Friendly: " + str(choice(['Off', 'On']))
+                            inj.text = "Injured: " + str(choice(['0', '20']))
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "bp"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    MDCard:
+                        orientation: "vertical"
+                        elevation: 10
+                        size_hint: 1, 0.5
+                        plant: plant.__self__
+                        defuse: defuse.__self__
+                        fuse: fuse.__self__
+                        carry_def: carry_def.__self__
+                        MDLabel:
+                            id: plant
+                            text: "Plant Duration"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: defuse
+                            text: "Defuse Duration"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: fuse
+                            text: "Fuse Time"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                        MDLabel:
+                            id: carry_def
+                            text: "Defuser Carrier"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            plant.text = "Plant Duration: " + str(randint(5, 15))
+                            defuse.text = "Defuse Duration: " + str(randint(5, 15))
+                            fuse.text = "Fuse Time: " + str(randrange(15, 90, 15))
+                            carry_def.text = "Defuser Carrier: " + str(choice(['On', 'Off']))
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "p"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    MDCard:
+                        orientation: "vertical"
+                        elevation: 10
+                        size_hint: 1, 0.5
+                        prep_phase_dur: prep_phase_dur.__self__
+                        ac_phase_dur: ac_phase_dur.__self__
+                        MDLabel:
+                            id: prep_phase_dur
+                            text: "Preparation Phase"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H5"
+                        MDLabel:
+                            id: ac_phase_dur
+                            text: "Action Phase"
+                            size_hint: 1, 1
+                            halign: "center"
+                            theme_text_color: "Primary"
+                            font_style: "H5"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            prep_phase_dur.text = "Preparation Phase: " + str(randrange(15, 120, 5))
+                            i = randint(0, 1)
+                            ac_phase_dur.text = "Action Phase: " + str(randrange(60, 360, 10)) if i == 0 else "Action Phase: " + str(randrange(390, 600, 30))
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "hud"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    huds: huds.__self__
+                    MDLabel:
+                        id: huds
+                        text: "HUD Settings"
+                        size_hint: 1, 0.5
+                        halign: "center"
+                        theme_text_color: "Primary"
+                        font_style: "H2"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            huds.text = str(choice(["Normal", "Minimal", "Pro League"]))
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "gm"
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: 15
+                    spacing: 5
+                    gamemode: gamemode.__self__
+                    MDLabel:
+                        id: gamemode
+                        text: "Game Mode"
+                        size_hint: 1, 0.5
+                        halign: "center"
+                        theme_text_color: "Primary"
+                        font_style: "H2"
+
+                    MDRaisedButton:
+                        size_hint: 1, 0.5
+                        text: "Random"
+                        on_release:
+                            gamemode.text = str(choice(["Bomb", "Secure Area", "Hostage"]))
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen5"
+            Screen:
+                name: "screen6"
+                BL_mini:
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Mini Games List"
+                        on_release:
+                            screen_manager.current = "mini"
+            Screen:
+                name: "mini"
+                BL_mini_s:
+                    MDRaisedButton:
+                        size_hint: 1, 0.1
+                        text: "Go Back!"
+                        theme_text_color: "Custom"
+                        text_color: [20, 0, 30, 1]
+                        on_release:
+                            screen_manager.current = "screen6"
+            Screen:
+                name: "sc"
+                BL_Match:
+            Screen:
+                name: "screen7"
+                BL_Rank:
+            Screen:
+                name: "screen8"
+                About_me:
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            nav_drawer: nav_drawer.__self__
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 5
+                Image:
+                    source: "image.png"
+                MDLabel:
+                    text: "Rainbow Six Random Generator"
+                    halign: "center"
+                    font_style: "Subtitle1"
+                    theme_text_color: "Custom"
+                    text_color: 0, 1, 0, 1
+                    size_hint: 1, 0.1
+
+                ScrollView:
+
+                    MDList:
+                        OneLineAvatarListItem:
+                            text: "Random team"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen1"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random operator attack"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen2"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random operator defence"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen4"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random map"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen3"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random custom settings"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen5"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random mini game"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen6"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random number of matches"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "sc"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "Random rank"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen7"
+                            IconLeftWidget:
+                                icon: "cloud-question"
+                        OneLineAvatarListItem:
+                            text: "About me"
+                            on_release:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "screen8"
+                            IconLeftWidget:
+                                icon: "alpha-i-circle"
+
+<BL_Team>:
+    pl1: pl1.__self__
+    pl2: pl2.__self__
+    pl3: pl3.__self__
+    pl4: pl4.__self__
+    pl5: pl5.__self__
+    pl6: pl6.__self__
+    pl7: pl7.__self__
+    pl8: pl8.__self__
+    pl9: pl9.__self__
+    pl10: pl10.__self__
+    ti1: ti1.__self__
+    ti2: ti2.__self__
+    ti3: ti3.__self__
+    ti4: ti4.__self__
+    ti5: ti5.__self__
+    ti6: ti6.__self__
+    ti7: ti7.__self__
+    ti8: ti8.__self__
+    ti9: ti9.__self__
+    ti10: ti10.__self__
+    orientation: "vertical"
+    padding: 10
+    size_hint: 1, 1
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: "horizontal"
+        spacing: 10
+        MDCard:
+            orientation: "vertical"
+            size_hint: 1, 1
+            elevation: 10
+            MDIcon:
+                icon: "sword-cross"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 210, 105, 30, 1
+                font_size: 50
+            MDLabel:
+                id: pl1
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [210, 105, 30, 1]
+            MDLabel:
+                id: pl2
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [210, 105, 30, 1]
+            MDLabel:
+                id: pl3
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [210, 105, 30, 1]
+            MDLabel:
+                id: pl4
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [210, 105, 30, 1]
+            MDLabel:
+                id: pl5
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [210, 105, 30, 1]
+        MDCard:
+            orientation: "vertical"
+            size_hint: 1, 1
+            elevation: 10
+            MDIcon:
+                icon: "shield"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 30, 144, 255, 1
+                font_size: 50
+            MDLabel:
+                id: pl6
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [30, 144, 255, 1]
+            MDLabel:
+                id: pl7
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [30, 144, 255, 1]
+            MDLabel:
+                id: pl8
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [30, 144, 255, 1]
+            MDLabel:
+                id: pl9
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [30, 144, 255, 1]
+            MDLabel:
+                id: pl10
+                text: "Player"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: [30, 144, 255, 1]
+    GridLayout:
+        size_hint: 1, 0.5
+        cols: 5
+        rows: 2
+        spacing: 10
+        MDTextField:
+            id: ti1
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti2
+            hint_text: "Name"
+            max_text_length: 15
+            ine_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti3
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti4
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti5
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti6
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti7
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti8
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti9
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+        MDTextField:
+            id: ti10
+            hint_text: "Name"
+            max_text_length: 15
+            line_color_normal: 0,0,1,1
+    AnchorLayout:
+        size_hint: 1, 0.2
+        anchor_x: "center"
+        anchor_y: "bottom"
+        MDRaisedButton:
+            size_hint: 1, 1
+            text: "Random"
+            on_release:
+                root.team()
+
+<BL_op_a>:
+    img: attac.__self__
+    lbl: op.__self__
+    lbl_lm: pw.__self__
+    lbl_ls: sw.__self__
+    lbl_sg: sg.__self__
+    padding: 10
+    orientation: "vertical"
+    Image:
+        id: attac
+        source: "questionmark.jpg"
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        padding: 10
+        spacing: 10
+        MDCard:
+            size_hint: 1, 1
+            elevation: 10
+            orientation: "vertical"
+            MDLabel:
+                text: "Operator"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: op
+            MDLabel:
+                text: "Primary Weapon"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: pw
+            MDLabel:
+                text: "Secondary Weapon"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: sw
+            MDLabel:
+                text: "Secondary Gadget"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: sg
+
+    AnchorLayout:
+        size_hint: 1, 0.6
+        anchor_x: "center"
+        anchor_y: "bottom"
+        padding: 10
+        spacing: 10
+        MDRaisedButton:
+            size_hint: 1, 1
+            text: "Random"
+            on_release:
+                root.operator_attack()
+
+<BL_op_d>:
+    img: defen.__self__
+    lbl: op1.__self__
+    lbl_lm: pw1.__self__
+    lbl_ls: sw1.__self__
+    lbl_sg: sg1.__self__
+    padding: 10
+    orientation: "vertical"
+    Image:
+        id: defen
+        source: "questionmark.jpg"
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        padding: 10
+        spacing: 10
+        MDCard:
+            size_hint: 1, 1
+            elevation: 10
+            orientation: "vertical"
+            MDLabel:
+                text: "Operator"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: op1
+            MDLabel:
+                text: "Primary Weapon"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: pw1
+            MDLabel:
+                text: "Secondary Weapon"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: sw1
+            MDLabel:
+                text: "Secondary Gadget"
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.3
+                id: sg1
+    AnchorLayout:
+        size_hint: 1, 0.6
+        anchor_x: "center"
+        anchor_y: "bottom"
+        padding: 10
+        spacing: 10
+        MDRaisedButton:
+            size_hint: 1, 1
+            text: "Random"
+            on_release:
+                root.operator_defence()
+
+<BL_Map>:
+    mp: mp.__self__
+    point: defs.__self__
+    spawn: atts.__self__
+    img: imgg.__self__
+    size_hint: 1, 1
+    orientation: "vertical"
+    padding: 20
+    spacing: 20
+
+    MDCard:
+        orientation: "vertical"
+        size_hint: 1, 0.7
+        elevation: 10
+        Image:
+            id: imgg
+            source: "questionmark.jpg"
+            size_hint_y: .8
+        MDLabel:
+            id: mp
+            text: "Map"
+            halign: "center"
+            font_style: "H6"
+            theme_text_color: "Primary"
+            size_hint_y: .2
+        MDLabel:
+            id: defs
+            text: "Defence point"
+            halign: "center"
+            font_style: "H6"
+            theme_text_color: "Primary"
+            size_hint_y: .2
+        MDLabel:
+            id: atts
+            text: "Attack spawn point"
+            halign: "center"
+            font_style: "H6"
+            theme_text_color: "Primary"
+            size_hint_y: .2
+    AnchorLayout:
+        size_hint: 1, 0.3
+        anchor_x: "center"
+        anchor_y: "bottom"
+        MDRaisedButton:
+            size_hint: 1, 1
+            text: "Random"
+            on_release:
+                root.random_map()
+
+<BL_Map_s>:
+    gl_maps: gl_1.__self__
+    orientation: "vertical"
+    padding: 20
+    spacing: 20
+    MDRaisedButton:
+        size_hint: 1, 0.1
+        text: "Reset"
+        theme_text_color: "Custom"
+        text_color: [20, 0, 30, 1]
+        on_release:
+            root.reset_maps()
+    MDCard:
+        elevation: 10
+        size_hint: 1, 1
+        GridLayout:
+            id: gl_1
+            size_hint: 1, 1
+            cols: 2
+            rows: 11
+            padding: 20
+            spacing: 5
+            MDFillRoundFlatButton:
+                id: kafe_dostoevskiy
+                size_hint: 1, 1
+                text: "kafe dostoevskiy"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(kafe_dostoevskiy)
+            MDFillRoundFlatButton:
+                id: border
+                size_hint: 1, 1
+                text: "border"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(border)
+            MDFillRoundFlatButton:
+                id: chalet
+                size_hint: 1, 1
+                text: "chalet"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(chalet)
+            MDFillRoundFlatButton:
+                id: clubhouse
+                size_hint: 1, 1
+                text: "clubhouse"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(clubhouse)
+            MDFillRoundFlatButton:
+                id: coastline
+                size_hint: 1, 1
+                text: "coastline"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(coastline)
+            MDFillRoundFlatButton:
+                id: outback
+                size_hint: 1, 1
+                text: "outback"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(outback)
+            MDFillRoundFlatButton:
+                id: kanal
+                size_hint: 1, 1
+                text: "kanal"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(kanal)
+            MDFillRoundFlatButton:
+                id: oregon
+                size_hint: 1, 1
+                text: "oregon"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(oregon)
+            MDFillRoundFlatButton:
+                id: theme_park
+                size_hint: 1, 1
+                text: "theme park"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(theme_park)
+            MDFillRoundFlatButton:
+                id: consulate
+                size_hint: 1, 1
+                text: "consulate"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(consulate)
+            MDFillRoundFlatButton:
+                id: villa
+                size_hint: 1, 1
+                text: "villa"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(villa)
+            MDFillRoundFlatButton:
+                id: house
+                size_hint: 1, 1
+                text: "house"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(house)
+            MDFillRoundFlatButton:
+                id: bank
+                size_hint: 1, 1
+                text: "bank"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(bank)
+            MDFillRoundFlatButton:
+                id: hereford_base
+                size_hint: 1, 1
+                text: "hereford base"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(hereford_base)
+            MDFillRoundFlatButton:
+                id: skyscraper
+                size_hint: 1, 1
+                text: "skyscraper"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(skyscraper)
+            MDFillRoundFlatButton:
+                id: fortress
+                size_hint: 1, 1
+                text: "fortress"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(fortress)
+            MDFillRoundFlatButton:
+                id: presidential_plane
+                size_hint: 1, 1
+                text: "presidential plane"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(presidential_plane)
+            MDFillRoundFlatButton:
+                id: yacht
+                size_hint: 1, 1
+                text: "yacht"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(yacht)
+            MDFillRoundFlatButton:
+                id: tower
+                size_hint: 1, 1
+                text: "tower"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(tower)
+            MDFillRoundFlatButton:
+                id: favela
+                size_hint: 1, 1
+                text: "favela"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(favela)
+            MDFillRoundFlatButton:
+                id: bartlett_university
+                size_hint: 1, 1
+                text: "bartlett university"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 30, 1]
+                on_release:
+                    root.delete_map(bartlett_university)
+
+<BL_mini>:
+    minigame: minigame.__self__
+    orientation: "vertical"
+    padding: 15
+    spacing: 10
+    MDCard:
+        orientation: "vertical"
+        elevation: 10
+        size_hint: 1, 0.5
+        MDLabel:
+            id: minigame
+            text: "This is the mini games in r6, you need to go to mini games list, add minigames, like 'only knives' or 'only pistols', start random generator and have fun in the game!!"
+            size_hint: 1, 0.5
+            halign: "center"
+            theme_text_color: "Primary"
+            font_style: "Body2"
+    MDRaisedButton:
+        size_hint: 1, 0.5
+        text: "Random"
+        on_release:
+            root.random_mini_game()
+
+<BL_mini_s>:
+    tf: mngame.__self__
+    minigames: gl9.__self__
+    orientation: "vertical"
+    padding: 15
+    spacing: 10
+    BoxLayout:
+        size_hint: 1, 0.1
+        orientation: "horizontal"
+        spacing: 30
+        MDTextField:
+            id: mngame
+            max_text_length: 30
+            hint_text: "Mini Game"
+            line_color_normal: 0,0,1,1
+            required: True
+        MDRaisedButton:
+            size_hint: 0.3, 1
+            text: "Add"
+            on_release:
+                root.add_mini_game()
+    MDCard:
+        size_hint: 1, 0.5
+        orientation: "vertical"
+        elevation: 10
+        GridLayout:
+            id: gl9
+            size_hint: 1, 1
+            cols: 1
+            padding: 5
+            spacing: 5
+    MDRaisedButton:
+        size_hint: 1, 0.1
+        text: "Clear"
+        theme_text_color: "Custom"
+        text_color: [20, 0, 30, 1]
+        on_release:
+            root.clear_games()
+
+<BL_Match>:
+    beg: beg.__self__
+    en: en.__self__
+    count: count.__self__
+    winr: winr.__self__
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+    MDLabel:
+        text: "Range of quantity"
+        size_hint: 1, 0.1
+        halign: "center"
+        theme_text_color: "Primary"
+        font_style: "H4"
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint: 1, 0.1
+        spacing: 10
+        MDTextField:
+            id: beg
+            hint_text: "Start"
+            line_color_normal: 0,0,1,1
+            required: True
+        MDTextField:
+            id: en
+            hint_text: "End"
+            line_color_normal: 0,0,1,1
+            required: True
+    MDLabel:
+        id: count
+        text: "Number of Matches"
+        size_hint: 1, 0.3
+        halign: "center"
+        theme_text_color: "Primary"
+        font_style: "H5"
+    MDLabel:
+        id: winr
+        text: "Win"
+        size_hint: 1, 0.3
+        halign: "center"
+        theme_text_color: "Primary"
+        font_style: "H5"
+    MDRaisedButton:
+        size_hint: 1, 0.2
+        text: "Random"
+        on_release:
+            root.random_count()
+<BL_Rank>:
+    img: iii.__self__
+    ran: rank_name.__self__
+    mmr: mmr.__self__
+    orientation: "vertical"
+    padding: 10
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        padding: 10
+        spacing: 10
+        Image:
+            id: iii
+            source: "questionmark.jpg"
+        MDCard:
+            size_hint: 1, 1
+            elevation: 10
+            orientation: "vertical"
+            MDLabel:
+                text: "Rank"
+                halign: "center"
+                font_style: "H5"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.5
+                id: rank_name
+            MDLabel:
+                text: "MMR"
+                halign: "center"
+                font_style: "H5"
+                theme_text_color: "Primary"
+                size_hint: 1, 0.5
+                id: mmr
+
+        MDRaisedButton:
+            size_hint: 1, 0.4
+            text: "Random"
+            on_release:
+                root.rank()
+<About_me>:
+    orientation: "vertical"
+    padding: 10
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "top"
+        MDFillRoundFlatIconButton:
+            text: "Me on Youtube"
+            icon: "youtube"
+            on_release:
+                root.yt()
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+        MDFillRoundFlatIconButton:
+            text: "Me on Instagram"
+            icon: "instagram"
+            on_release:
+                root.inst()
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "bottom"
+        MDFillRoundFlatIconButton:
+            text: "Donate me"
+            icon: "bitcoin"
+            on_release:
+                root.dnt()
+
